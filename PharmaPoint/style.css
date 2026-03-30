@@ -1,0 +1,63 @@
+/* Background */
+body {
+  background-color: #ababb2;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+#navbar {
+    background-color: #212529;
+}
+
+/* Card Styling */
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+/* Card Hover Effect */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Image Styling */
+.card img {
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Card Title */
+.card-title {
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Card Text */
+.card-text {
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Button Style */
+.btn-primary {
+  display: block;
+  margin: auto;
+  border-radius: 20px;
+}
+
+/* Spacing between cards */
+.row {
+  margin-top: 30px;
+}
+
+/* Footer (if you added) */
+footer {
+  background-color: #212529;
+  color: white;
+  padding: 20px 0;
+  margin-top: 50px;
+}

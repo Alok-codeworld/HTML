@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f7fa;
+      padding-top: 70px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navbar */
+    #navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: black;
+      z-index: 1000;
+      padding: 10px 30px;
+      color: white;
+    }
+    #navbar a { color: white; margin: 0 15px; text-decoration: none; }
+    
+    /* Checkout */
+    .checkout-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease;
+    }
+
+    h2 { margin-bottom: 20px; }
+    .product-item { display: flex; align-items: center; margin-bottom: 20px; }
+    .product-item img { width: 120px; border-radius: 10px; margin-right: 20px; }
+    .product-info { flex: 1; }
+    .product-price { font-weight: bold; color: #28a745; }
+
+    .form-control { margin-bottom: 15px; }
+    .payment-options button { margin-right: 15px; margin-top: 10px; }
+    
+    @keyframes fadeIn { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav id="navbar" class="d-flex justify-content-between align-items-center">
+  <div>
+    <a href="index.html">Home</a>
+    <a href="#">Cart</a>
+  </div>
+</nav>
+
+<!-- Checkout -->
+<div class="container checkout-container">
+  <h2>Checkout</h2>
+
+  <!-- Cart Products -->
+  <div id="cart-products"></div>
+
+  <!-- Customer Details -->
+  <h4>Customer Details</h4>
+  <form id="checkout-form">
+    <input type="text" class="form-control" placeholder="Full Name" required id="customer-name">
+    <input type="text" class="form-control" placeholder="Address" required id="customer-address">
+    <input type="text" class="form-control" placeholder="City" required id="customer-city">
+    <input type="text" class="form-control" placeholder="State" required id="customer-state">
+    <input type="text" class="form-control" placeholder="Pin Code" required id="customer-pin">
+    <input type="tel" class="form-control" placeholder="Phone Number" required id="customer-phone">
+    <input type="email" class="form-control" placeholder="Email" required id="customer-email">
+  </form>
+
+  <!-- Payment Options -->
+  <h4>Payment Options</h4>
+  <div class="payment-options">
+    <button class="btn btn-success" onclick="completeOrder('Credit/Debit Card')">Credit/Debit Card</button>
+    <button class="btn btn-primary" onclick="completeOrder('UPI/Net Banking')">UPI / Net Banking</button>
+    <button class="btn btn-warning" onclick="completeOrder('Cash on Delivery')">Cash on Delivery</button>
+  </div>
+</div>
+
+<script>
+  // Example cart data (in real app, you pass products from product page)
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const products = [
+    {
+      id: "VitaminB12",
+      name: "Vitamin B12 Injection",
+      price: 250,
+      img: "https://via.placeholder.com/120.png?text=Vitamin+B12"
+    },
+    {
+      id: "Paracetamol",
+      name: "Paracetamol Injection",
+      price: 150,
+      img: "https://via.placeholder.com/120.png?text=Paracetamol"
+    },
+    {
+      id: "Insulin",
+      name: "Insulin Injection",
+      price: 500,
+      img: "https://via.placeholder.com/120.png?text=Insulin"
+    }
+  ];
+
+  // Render cart items
+  const cartContainer = document.getElementById("cart-products");
+  let totalPrice = 0;
+
+  if(cart.length === 0){
+    cartContainer.innerHTML = "<p>Your cart is empty. Go back to products page.</p>";
+  } else {
+    cart.forEach(productId => {
+      const product = products.find(p => p.id === productId);
+      if(product){
+        totalPrice += product.price;
+        const div = document.createElement("div");
+        div.classList.add("product-item");
+        div.innerHTML = `
+          <img src="${product.img}" alt="${product.name}">
+          <div class="product-info">
+            <div>${product.name}</div>
+            <div class="product-price">₹${product.price}</div>
+          </div>
+        `;
+        cartContainer.appendChild(div);
+      }
+    });
+    const totalDiv = document.createElement("div");
+    totalDiv.innerHTML = `<h5>Total Price: ₹${totalPrice}</h5>`;
+    totalDiv.style.marginTop = "20px";
+    cartContainer.appendChild(totalDiv);
+  }
+
+  // Complete Order
+  function completeOrder(method){
+    const name = document.getElementById("customer-name").value;
+    const address = document.getElementById("customer-address").value;
+    const city = document.getElementById("customer-city").value;
+    const state = document.getElementById("customer-state").value;
+    const pin = document.getElementById("customer-pin").value;
+    const phone = document.getElementById("customer-phone").value;
+    const email = document.getElementById("customer-email").value;
+
+    if(!name || !address || !city || !state || !pin || !phone || !email){
+      alert("Please fill all customer details.");
+      return;
+    }
+
+    alert(`Order Completed!\nPayment Method: ${method}\nTotal Amount: ₹${totalPrice}`);
+    localStorage.removeItem("cart");
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>

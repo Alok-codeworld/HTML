@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Injection Page</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f5f7fa;
+      padding-top: 80px;
+    }
+
+    /* Navbar */
+    #navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: black;
+      z-index: 1000;
+      padding: 10px;
+    }
+
+    #navbar a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      position: relative;
+    }
+
+    /* underline animation */
+    #navbar a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: #00bfff;
+      transition: 0.3s;
+    }
+
+    #navbar a:hover::after {
+      width: 100%;
+    }
+
+    /* Cards */
+    .card {
+      border-radius: 15px;
+      overflow: hidden;
+      transition: 0.3s;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      border-radius: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav id="navbar" class="d-flex justify-content-between align-items-center px-4">
+  
+  <!-- Logo + Name -->
+  <div class="d-flex align-items-center">
+    <img src="Blue Minimalist Medical Clinic Logo.png" style="height:40px; width:40px; margin-right:10px;">
+    <span style="color:white; font-weight:bold;">PharmaPoint</span>
+  </div>
+
+  <!-- Search -->
+  <form class="d-flex" onsubmit="searchItems(event)">
+    <input id="search" class="form-control me-2" placeholder="Search injections...">
+    <button class="btn btn-outline-light">Search</button>
+  </form>
+
+  <!-- Menu -->
+  <div>
+    <a href="index.html">Home</a>
+    <a href="#">Cart (<span id="count">0</span>)</a>
+    <a href="profile.html">Profile</a>
+  </div>
+
+</nav>
+
+<!-- Products -->
+<div class="container">
+  <div class="row g-4">
+
+    
+    <!-- Product 1 -->
+   <div class="row">
+
+  <!-- Product 1 -->
+  <div class="col-md-4">
+    <div class="card">
+      <img src="paracetamol-500mg-tablets-intemol-500-2-.jpeg">
+      <div class="card-body text-center">
+        <h5>Paracetamol Tablet</h5>
+        <p>Used for fever and pain relief</p>
+        <h6 class="text-success">₹25</h6>
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-primary" onclick="addCart()">Add to Cart</button>
+          <button class="btn btn-outline-dark" onclick="showDetails('Paracetamol Tablet')">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 2 -->
+  <div class="col-md-4">
+    <div class="card">
+      <img src="Ibuprofen Tablet.jpg">
+      <div class="card-body text-center">
+        <h5>Ibuprofen Tablet</h5>
+        <p>Pain and inflammation relief</p>
+        <h6 class="text-success">₹35</h6>
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-primary" onclick="addCart()">Add to Cart</button>
+          <button class="btn btn-outline-dark" onclick="showDetails('Ibuprofen Tablet')">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 3 -->
+  <div class="col-md-4">
+    <div class="card">
+      <img src="Cetirizine Tablet.jpg">
+      <div class="card-body text-center">
+        <h5>Cetirizine Tablet</h5>
+        <p>Used for allergy and cold</p>
+        <h6 class="text-success">₹20</h6>
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-primary" onclick="addCart()">Add to Cart</button>
+          <button class="btn btn-outline-dark" onclick="showDetails('Cetirizine Tablet')">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 4 -->
+  <div class="col-md-4">
+    <div class="card">
+      <img src="Pantoprazole.jpg">
+      <div class="card-body text-center">
+        <h5>Pantoprazole Tablet</h5>
+        <p>Used for acidity and gastric issues</p>
+        <h6 class="text-success">₹80</h6>
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-primary" onclick="addCart()">Add to Cart</button>
+          <button class="btn btn-outline-dark" onclick="showDetails('Pantoprazole Tablet')">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 5 -->
+  <div class="col-md-4">
+    <div class="card">
+      <img src="Metformin Tablet.jpg">
+      <div class="card-body text-center">
+        <h5>Metformin Tablet</h5>
+        <p>Used for diabetes control</p>
+        <h6 class="text-success">₹50</h6>
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-primary" onclick="addCart()">Add to Cart</button>
+          <button class="btn btn-outline-dark" onclick="showDetails('Metformin Tablet')">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product 6 -->
+  <div class="col-md-4">
+    <div class="card">
+      <img src="Amlodipine Tablet.jpg">
+      <div class="card-body text-center">
+        <h5>Amlodipine Tablet</h5>
+        <p>Used for high blood pressure</p>
+        <h6 class="text-success">₹40</h6>
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-primary" onclick="addCart()">Add to Cart</button>
+          <button class="btn btn-outline-dark" onclick="showDetails('Amlodipine Tablet')">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- JS -->
+<script>
+  let count = 0;
+
+  function addCart() {
+    count++;
+    document.getElementById("count").innerText = count;
+  }
+
+  function showDetails(name) {
+    alert("Details of " + name + ":\n\nThis is a high-quality Medicine used for treatment.\nUse only with doctor guidance.");
+  }
+
+  function searchItems(event) {
+    event.preventDefault();
+
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+      let title = card.querySelector("h5").innerText.toLowerCase();
+
+      if (title.includes(input)) {
+        card.parentElement.style.display = "block";
+      } else {
+        card.parentElement.style.display = "none";
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
